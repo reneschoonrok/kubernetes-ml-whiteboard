@@ -1,7 +1,9 @@
 # Kubernetes deployments through whiteboard and machinelearning OCR
-An experiment trying to make kubernetes deployments easier with ML
-You can use stickers, t-shirts and text-notes
-It can deploy and delete (turn up the resolution to 720p for the camera for delete. see in code)
+An experiment trying to make kubernetes deployments easier with machine learning
+This uses: Python 2.7, Opencv2 and TesseractOCR. The training set for characters is provided also as a large file.
+
+You can use stickers, t-shirts and text-notes ;)
+It can deploy to and delete from kubernetes (turn up the resolution to 720p for the camera for delete. see in code)
 
 ![](/opencvtesseract.gif)
 
