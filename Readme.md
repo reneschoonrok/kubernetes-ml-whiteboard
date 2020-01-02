@@ -8,5 +8,5 @@ It can deploy and delete (turn up the resolution to 720p for the camera for dele
 ### Credits.. <br/>
  <br/>
 pyimagesearch for the ML code  <br/>
-Do not take my code as a starting point. Instead goto below and get properly started. <br/>
+Do not take my code as a starting point. Instead go to below website and get properly started. <br/>
 https://pyimagesearch.com <br/>
