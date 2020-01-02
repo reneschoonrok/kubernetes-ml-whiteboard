@@ -1,0 +1,8 @@
+grafana
+tensorflow
+nginx
+mediawiki
+mysql
+stellar
+volumepvc
+delete

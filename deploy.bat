@@ -1,0 +1,1 @@
+kubectl apply -f yaml/%1.yaml

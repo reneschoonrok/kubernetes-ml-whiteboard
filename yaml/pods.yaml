@@ -1,0 +1,16 @@
+NAME                                  READY   STATUS    RESTARTS   AGE
+kubernetes-stellar-54b879c9b6-4lmkr   1/1     Running   0          58s
+nginx                                 1/1     Running   0          86s
+NAME                                  READY   STATUS    RESTARTS   AGE
+kubernetes-stellar-54b879c9b6-4lmkr   1/1     Running   0          2m8s
+nginx                                 1/1     Running   0          2m36s
+stellar-55f575d5d7-vf8w8              1/1     Running   0          7s
+NAME                       READY   STATUS    RESTARTS   AGE
+nginx                      1/1     Running   0          4m33s
+stellar-55f575d5d7-vf8w8   1/1     Running   0          2m4s
+NAME                       READY   STATUS    RESTARTS   AGE
+nginx                      1/1     Running   0          4m34s
+stellar-55f575d5d7-vf8w8   1/1     Running   0          2m5s
+NAME                       READY   STATUS    RESTARTS   AGE
+nginx                      1/1     Running   0          4m37s
+stellar-55f575d5d7-vf8w8   1/1     Running   0          2m8s
