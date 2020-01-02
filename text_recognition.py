@@ -1,5 +1,5 @@
 # USAGE
-# Used: Python2.7.17 - code is only for reference.
+# Used: Python2.7.17 - code is working, but is advised to use only for reference.
 # instead goto https://www.pyimagesearch.com/ where you will finds a lot of great tutorials
 # to get started with image recognition/OCR/Machinelearning
 # to start: open cmd and run startme.bat and startme2.bat
