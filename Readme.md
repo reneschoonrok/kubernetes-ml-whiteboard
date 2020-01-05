@@ -3,6 +3,7 @@
 ## Update 05/01/2020: Progressing very well on a fully containerized solution using alpine + kubectl + helm3 + Nodejs + Tesseract.js
 (all in one container, no client python install or anything needed anymore, I will push the repo and Dockerfile soon)
 
+---------------------------------------------------------------------------------
 An experiment trying to make kubernetes deployments easier with machine learning
 This uses: Python 2.7, Opencv2 and TesseractOCR. The training set for characters is provided also as a large file.
 
