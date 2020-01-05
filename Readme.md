@@ -1,7 +1,7 @@
 # Kubernetes deployments through whiteboard and machinelearning OCR
 
-## Update 05/01/2020: Progressing very well on a fully containerized solution using alpine + kubectl + helm3 + Nodejs + Tesseract.js
-(all in one container, no client python install or anything needed anymore, I will push the repo and Dockerfile soon)
+## Update 05/01/2020: Progressing very well on a fully containerized solution using Alpine image + Kubectl + Helm3 + Nodejs + Tesseract.js
+(all in one container, no client python install or anything needed anymore, I will push the Repo and Dockerfile soon)
 
 ---------------------------------------------------------------------------------
 An experiment trying to make kubernetes deployments easier with machine learning
