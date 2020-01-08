@@ -3,7 +3,7 @@
 It is an experiment to try and do OCR client + backend processing fully from a container. <br>
 
 ## Update 08/01/2020: 
-I containerized the demo, now so it is much easier to load the demo through minikube for example. <br>
+I containerized the demo, so it is much easier to load the demo through minikube for example. <br>
 
 Screenshot from the container version: <br>
 ![](/screenshot.jpg)
