@@ -22,7 +22,7 @@ Make sure you have a white background as Tesseract is sensitive to that. <br>
 kubectl apply -f 1-deployment.yaml <br>
 kubectl apply -f 2-service.yaml <br>
 minikube service helm3-kubectl-node --https <br>
-(That should open your browser. Container is running on 8443 https) <br>
+(That should open your browser. Container is running on 8443 https https://localhost:8443/) <br>
 
 The movie below was originally created with the python code which is still in the python branch. But that requires you to setup python with the modules etc. <br>
 ![](/opencvtesseract.gif)
