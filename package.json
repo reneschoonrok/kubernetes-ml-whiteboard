@@ -1,0 +1,17 @@
+{
+  "name": "k8s-ocr-deploy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "reneschoonrok",
+  "license": "ISC",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "https": "^1.0.0"
+  }
+}

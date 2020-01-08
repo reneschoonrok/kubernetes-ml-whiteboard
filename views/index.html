@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tesseract.js Video Streaming Recognition</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src='/js/tesseract.min.js'></script>
+</head>
+<body>
+<br>
+<br>
+<br>
+<br>
+
+  <div id="root">
+    <video id="videoele" style="width: 640px; height: 360px; position:absolute; top:0; left:0; " autoplay playsinline></video>
+    <div id="sep"></div>
+    <div id="messages">
+
+    </div>
+    <br>
+
+
+  </div>
+Found: <input type="text" id="myinput" onchange="senddeployyaml()"><br>
+
+  <canvas id="canvasele" style="display:none;"></canvas>
+  <canvas id="myCanvas"  style="width: 640px; height: 360px; position:absolute; top:0; left:0; z-index:1; border:1px solid #1fd325;">
+    Your browser does not support the HTML5 canvas tag.</canvas>
+  <script>
+    const { createWorker, createScheduler } = Tesseract;
+    const scheduler = createScheduler();
+    //const video = document.getElementById('poem-video');
+    const video = document.getElementById('videoele');
+    const messages = document.getElementById('messages');
+    let timerId = null;
+    var allowed_values = ["grafana", "nginx", "stellar", "tensorflow", "mysql", "helm mariadb", "artifactory", "prometheus", "wordpress"]
+
+    var deployed_values = [];
+    const addMessage = (m, bold) => {
+      let msg = `<p>${m}</p>`;
+      if (bold) {
+        msg = `<p class="bold">${m}</p>`;
+      }
+      messages.innerHTML += msg;
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+
+    function senddeployyaml() {
+      var deployname = document.getElementById('myinput').value;
+      var xhttp = new XMLHttpRequest();
+      xhttp.open('GET', '/deployyaml?name=' + deployname, true);
+      xhttp.send();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var response = xhttp.responseText;
+          console.log(response);
+          addMessage(response);
+
+        }
+      }
+    }
+
+    function senddeployhelmyaml() {
+      var deployname = document.getElementById('myinput').value;
+      var xhttp = new XMLHttpRequest();
+      addMessage('Calling Helm deploy for: ' + deployname);
+
+      xhttp.open('GET', '/deployhelm?name=' + deployname, true);
+
+      xhttp.send();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var response = xhttp.responseText;
+          console.log(response);
+          addMessage(response);
+
+        }
+      }
+    }
+
+    const doOCR = async () => {
+      const c = document.createElement('canvas');
+      c.width = 640;
+      c.height = 360;
+      c.getContext('2d').drawImage(video, 0, 0, 640, 360);
+      const start = new Date();
+      const results = await scheduler.addJob('recognize', c);
+      const { data: { text } } = results;
+
+      //draw boxes
+      var x0 = [];
+      var y0 = [];
+      var x1 = [];
+      var y1 = [];
+      for (let i = 0; i < results.data.lines.length; i++) {
+        x0[i]=results.data.lines[i].bbox.x0/2
+        x1[i]=results.data.lines[i].bbox.x1/2
+        y0[i]=results.data.lines[i].bbox.y0/2
+        y1[i]=results.data.lines[i].bbox.y1/2
+      }
+
+      const end = new Date()
+
+      var linenumber = 0;
+      const context = document.getElementById("myCanvas");
+      var ctx2 = context.getContext("2d");
+      ctx2.clearRect(0, 0, context.width, context.height);
+
+      text.split('\n').forEach((line) => {
+        var line2 = line.toLowerCase();
+
+        for (i = 0; i < allowed_values.length; i++) {
+          var n = line2.search(allowed_values[i]);
+          if (n > -1) {
+
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+
+            ctx.beginPath();
+            ctx.rect(x0[linenumber]-15, y0[linenumber] * 0.8, (x1[linenumber] - x0[linenumber])+5, (y1[linenumber] - y0[linenumber]));
+            ctx.strokeStyle = "#51f41c";
+            ctx.stroke();
+
+            if (deployed_values.indexOf(allowed_values[i]) == -1) {
+
+              document.getElementById("myinput").value = allowed_values[i];
+              if (allowed_values[i].search("helm") > -1){
+                senddeployhelmyaml(allowed_values[i])
+              } else {
+                senddeployyaml(allowed_values[i])
+              }
+              deployed_values.push(allowed_values[i])
+            } else {
+
+            }
+          }
+        }
+        linenumber = linenumber + 1;
+      });
+    };
+
+    (async () => {
+      addMessage('Initializing Tesseract.js');
+      for (let i = 0; i < 4; i++) {
+        const worker = createWorker();
+        await worker.load();
+        await worker.loadLanguage('eng');
+        await worker.initialize('eng');
+        scheduler.addWorker(worker);
+      }
+      addMessage('Initialized Tesseract.js');
+
+      var intervalID = window.setInterval(doOCR, 1000);
+      video.addEventListener('pause', () => {
+        clearInterval(timerId);
+      });
+      addMessage('Now you can now use the video to do OCR. :)');
+      video.controls = true;
+    })();
+
+
+
+    const constraints = {
+      video: {'facingMode':'environment',width: {exact: 1280}, height: {exact: 720}}
+    };
+    const video2 = document.getElementById('videoele');
+    const img = document.getElementById('imageele');
+    const canvas = document.createElement('canvas');
+    const screenshotButton = document.getElementById('btnele');
+
+    function hasGetUserMedia() {
+      return !!(navigator.mediaDevices &&
+              navigator.mediaDevices.getUserMedia);
+    }
+
+    if (hasGetUserMedia()) {
+      // Good to go!
+      navigator.mediaDevices.getUserMedia(constraints).then(gotStream).catch(handleError);
+
+    } else {
+      alert('getUserMedia() is not supported by your browser');
+    }
+
+    function gotStream(stream) {
+      window.stream = stream; // make stream available to console
+      video2.srcObject = stream;
+    }
+
+    function handleError(error) {
+      console.log(error);
+    }
+    screenshotButton.onclick = video.onclick = function() {
+      document.getElementById("ocr_results").innerText = "";
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').drawImage(video, 0, 0);
+      // Other browsers will fall back to image/png
+      img.src = canvas.toDataURL('image/png');
+      runOCR(img.src);
+    };
+
+  </script>
+</body>
+</html>
