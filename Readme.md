@@ -8,7 +8,7 @@ I containerized the demo, so it is much easier to load the demo through minikube
 Screenshot from the container version: <br>
 ![](/screenshot.jpg)
 
-To do that I had to switch to nodejs with tesseract.js but the OCR is working and I added helm deploy example. <br> 
+To containerize, I had to switch to nodejs with tesseract.js. The OCR is a little bit harder (I will examine that) and I added helm deploy example. <br> 
 So 'helm mariadb' fetches helm chart from stable and deploys. <br>
 The container serves the client/webcam app and in the backend it deploys via kubectl and helm3 which are also in the image (see dockerfile) <br>
 
