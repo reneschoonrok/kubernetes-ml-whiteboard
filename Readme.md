@@ -6,7 +6,7 @@ I containerized the demo, so it is much easier to load the demo through minikube
 Screenshot from the container version: <br>
 ![](/screenshot.jpg)
 
-I had to switch to nodejs with tesseract.js. The OCR is less accurate then the python one which preprocesses with Opencv (I will examine that). <br> 
+I had to switch to nodejs with tesseract.js. The OCR is less accurate then the python one which preprocesses with Opencv (I will examine that). You can also test it with text on your phone (see phone.jpg) <br> 
 The container serves the client app and in the backend it deploys via kubectl and helm3 which are also in the image (see dockerfile) <br>
 
 The demo is restricted to these words: "grafana", "nginx", "stellar", "tensorflow", "mysql", "helm mariadb", "artifactory", "prometheus", "wordpress" <br>
