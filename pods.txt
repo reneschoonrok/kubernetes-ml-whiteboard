@@ -1,3 +1,0 @@
-NAME                       READY   STATUS    RESTARTS   AGE
-grafana-7cfc8cc445-mqt8w   1/1     Running   0          44m
-stellar-55f575d5d7-hq7z7   1/1     Running   0          46m
