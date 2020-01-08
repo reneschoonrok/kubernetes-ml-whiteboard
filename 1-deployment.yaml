@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helm3-kubectl-node
+  labels:
+    app: helm3-kubectl-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: helm3-kubectl-node
+  template:
+    metadata:
+      labels:
+        app: helm3-kubectl-node
+    spec:
+      containers:
+      - name: helm3-kubectl-node
+        image: reneschoonrok/alpine-helm3-kubectl-node

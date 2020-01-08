@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tensorflow
+spec:
+  selector:
+    app: tensorflow
+  ports:
+  - protocol: TCP
+    name: http
+    port: 8888
+    targetPort: 8888
+  type: LoadBalancer
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tensorflow
+  labels:
+    app: tensorflow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tensorflow
+  template:
+    metadata:
+      labels:
+        app: tensorflow
+    spec:
+      containers:
+      - name: tensorflow
+        image: tensorflow/tensorflow:nightly-py3-jupyter
+        env:
+        - name: TOKEN
+          value: "exposed"
