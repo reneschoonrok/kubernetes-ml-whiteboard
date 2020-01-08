@@ -1,14 +1,14 @@
 # A nodejs container with OCR using Tesseract.js
 
 ## Update 08/01/2020: 
-I containerized the demo, so it is much easier to load the demo through minikube for example. <br>
+Demo is containerized now, so it is much easier to load the demo through minikube for example. <br>
 
 Screenshot from the container version: <br>
 ![](/screenshot.jpg)
 
-I had to switch to nodejs with tesseract.js. The OCR is less accurate then the python one which preprocesses with Opencv (I will examine that). <br> 
+Switched from python to nodejs with tesseract.js. The OCR is less accurate then the python one which preprocesses with Opencv. <br> 
 You can also test it with text on your phone (see phone.jpg) <br> 
-The container serves the client app and in the backend it deploys via kubectl and helm3 which are also in the image (see dockerfile) <br>
+The container serves the client app and in the backend it deploys via kubectl and helm3. <br>
 
 The demo is restricted to these words: "grafana", "nginx", "stellar", "tensorflow", "mysql", "helm mariadb", "artifactory", "prometheus", "wordpress" <br>
 This can be changed in the index.html <br>
