@@ -15,6 +15,8 @@ The container serves the client/webcam app and in the backend it deploys via kub
 The demo is restricted to these words: "grafana", "nginx", "stellar", "tensorflow", "mysql", "helm mariadb", "artifactory", "prometheus", "wordpress" <br>
 This can be changed in the index.html <br>
 
+Make sure you have a white background as Tesseract is sensitive to that. <br>
+
 
 ### Deployment instructions
 kubectl apply -f 1-deployment.yaml <br>
